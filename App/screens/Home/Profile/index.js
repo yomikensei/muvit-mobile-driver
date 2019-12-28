@@ -63,6 +63,7 @@ const Profile = props => {
       </RegularText>
       <View style={{ paddingHorizontal: RFValue(24) }}>
         <Action backgroundColor="#1969C5" title="Edit Profile" />
+        <Action backgroundColor="#1969C5" title="Change Password" />
         <Action backgroundColor="#1969C5" title="Help / Support" />
         <Action backgroundColor="#BD0000" title="Logout" action={Logout} />
       </View>
