@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import { View,Image,ScrollView,TouchableOpacity } from 'react-native'
 import BaseStyles from '../../shared/theme/base'
-import TopNav from '../../components/topNav'
+import TopNav from 'components/TopNav'
 import RegularText from '../../components/apptext/RegularText';
 import MediumText from '../../components/apptext/MediumText';
 import BoldText from '../../components/apptext/BoldText';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Colors from '../../shared/theme/colors';
-import DashNav from '../../components/dashNav';
+import DashNav from 'components/DashNav';
 
 export default class RequestInfo extends Component {
     render() {

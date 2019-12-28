@@ -6,7 +6,7 @@ import MediumText from '../../components/apptext/MediumText';
 import BoldText from '../../components/apptext/BoldText';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Colors from '../../shared/theme/colors';
-import DeliveryAlert from '../../components/deliveryalert';
+import DeliveryAlert from '../../components/DeliveryAlert';
 
 export default class Profile extends Component {
     render() {

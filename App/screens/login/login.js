@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View,TextInput,ScrollView,TouchableOpacity } from 'react-native'
 import BaseStyles from '../../shared/theme/base'
-import TopNav from '../../components/topNav'
+import TopNav from 'components/TopNav'
 import RegularText from '../../components/apptext/RegularText';
 import MediumText from '../../components/apptext/MediumText';
 import BoldText from '../../components/apptext/BoldText';
