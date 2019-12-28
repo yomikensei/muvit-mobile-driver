@@ -4,27 +4,26 @@ import { createAppContainer, createBottomTabNavigator } from 'react-navigation';
 import { RFValue } from 'react-native-responsive-fontsize';
 import Profile from './Profile';
 import Wallet from './Wallet';
-import Home from './Home';
+import Dashboard from './Dashboard';
 import History from './History';
 
-const App = createBottomTabNavigator(
+const HomeStack = createBottomTabNavigator(
   {
     Dashboard: {
-      screen: Home,
+      screen: Dashboard,
       navigationOptions: () => ({
         header: null,
         tabBarLabel: 'Dashboard',
         tabBarIcon: ({ tintColor }) => <Icon name="home" size={18} color={tintColor} />,
       }),
     },
-    // History: {
-    //   screen: History,
-    //   navigationOptions: () => ({
-    //     tabBarLabel: 'History',
-    //     tabBarIcon: ({ tintColor }) => <Icon name="clock" size={18} color={tintColor} />,
-    //   }),
-    // },
-
+    History: {
+      screen: History,
+      navigationOptions: () => ({
+        tabBarLabel: 'History',
+        tabBarIcon: ({ tintColor }) => <Icon name="clock" size={18} color={tintColor} />,
+      }),
+    },
     Wallet: {
       screen: Wallet,
       navigationOptions: () => ({
@@ -62,4 +61,4 @@ const App = createBottomTabNavigator(
   }
 );
 
-export default createAppContainer(App);
+export default createAppContainer(HomeStack);

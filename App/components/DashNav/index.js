@@ -6,7 +6,7 @@ import { RegularText, BoldText } from 'components/Text';
 export default props => {
   const { title, navigation, info } = props;
   return (
-    <View style={{ width: '100%', marginBottom: RFValue(46) }}>
+    <View style={{ width: '100%', marginBottom: RFValue(10) }}>
       <View
         style={{
           flexDirection: 'row',
