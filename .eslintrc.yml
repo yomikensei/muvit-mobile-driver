@@ -1,0 +1,43 @@
+parser: babel-eslint
+extends: airbnb
+env:
+  es6: true
+  node: true
+plugins:
+  - react
+  - jsx-a11y
+  - import
+  - prettier
+rules:
+  max-len:
+    - 0
+    - 200
+    - 2
+  react/jsx-filename-extension:
+    - error
+    - extensions:
+        - '.js'
+        - '.jsx'
+  jsx-a11y/label-has-for: off
+  import/no-extraneous-dependencies: off
+  camelcase: off
+  no-console: off
+  no-underscore-dangle: off
+  no-absolute-path: off
+  arrow-parens: off
+  object-curly-newline: off
+  operator-linebreak: off
+  react/forbid-prop-types: off
+  react/no-array-index-key: off
+  react/prefer-stateless-function: off
+  react/no-unescaped-entities: off
+  react/prop-types: off
+  react/destructuring-assignmentglobals: off
+  it: 0
+  expect: 0
+  describe: 0
+  navigator: 0
+settings:
+  import/resolver:
+    node:
+      paths: ['App']
