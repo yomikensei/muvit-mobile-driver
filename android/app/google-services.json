@@ -1,0 +1,69 @@
+{
+  "project_info": {
+    "project_number": "864234767875",
+    "firebase_url": "https://muvit-v1-261420.firebaseio.com",
+    "project_id": "muvit-v1-261420",
+    "storage_bucket": "muvit-v1-261420.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864234767875:android:768123e34b9a313c9bf036",
+        "android_client_info": {
+          "package_name": "com.muvit"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864234767875-d3h2kshomlnqqrm0b8g63h3frdndr620.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlscVG4uF2S8o1YXK4pRUPARq_4S-4oE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864234767875-d3h2kshomlnqqrm0b8g63h3frdndr620.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:864234767875:android:d61ae740477d3a809bf036",
+        "android_client_info": {
+          "package_name": "com.muvit.driver"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "864234767875-d3h2kshomlnqqrm0b8g63h3frdndr620.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDlscVG4uF2S8o1YXK4pRUPARq_4S-4oE4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "864234767875-d3h2kshomlnqqrm0b8g63h3frdndr620.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
