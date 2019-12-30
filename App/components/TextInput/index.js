@@ -18,14 +18,18 @@ const styles = StyleSheet.create({
 export default props => {
   const {
     label,
-    field: { name },
+    field: { name, value },
     form: { handleChange },
     ...rest
   } = props;
   return (
     <View style={BaseStyles.input}>
       <RegularText customstyle={{ fontSize: RFValue(10) }}>{label}</RegularText>
-      <TextInput style={styles.TextInput} onChangeText={handleChange(name)} {...rest} />
+      <TextInput
+        style={styles.TextInput}
+        onChangeText={handleChange(name)}
+        {...{ ...rest, value }}
+      />
     </View>
   );
 };

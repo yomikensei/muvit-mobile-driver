@@ -7,21 +7,29 @@ import { MediumText } from 'components/Text';
 import TextInput from 'components/TextInput';
 
 export default props => {
-  const { handleSubmit, handleChange, isLoading } = props;
+  const { handleSubmit, handleChange, isSubmitting } = props;
   return (
     <>
       <Field
-        name="email"
+        name="current_password"
         component={TextInput}
-        label="Email"
-        keyboardType="email-address"
+        label="Current Password"
+        secureTextEntry
         returnKeyType="next"
         handleChange={handleChange}
       />
       <Field
-        name="password"
+        name="prepass"
         component={TextInput}
         label="Password"
+        secureTextEntry
+        returnKeyType="next"
+        handleChange={handleChange}
+      />
+      <Field
+        name="confirmation"
+        component={TextInput}
+        label="Confirm Password"
         secureTextEntry
         returnKeyType="done"
         handleChange={handleChange}
@@ -29,12 +37,12 @@ export default props => {
       <TouchableOpacity
         onPress={handleSubmit}
         style={{ ...BaseStyles.button, marginBottom: RFValue(50) }}
-        disabled={isLoading}
+        disabled={isSubmitting}
       >
-        {isLoading ? (
+        {isSubmitting ? (
           <ActivityIndicator size={25} color="#FFF" />
         ) : (
-          <MediumText customstyle={{ color: '#FFF' }}>Login</MediumText>
+          <MediumText customstyle={{ color: '#FFF' }}>Change Password</MediumText>
         )}
       </TouchableOpacity>
     </>

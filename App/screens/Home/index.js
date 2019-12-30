@@ -7,7 +7,7 @@ import Wallet from './Wallet';
 import Dashboard from './Dashboard';
 import History from './History';
 
-const HomeStack = createBottomTabNavigator(
+const HomeTab = createBottomTabNavigator(
   {
     Dashboard: {
       screen: Dashboard,
@@ -57,8 +57,7 @@ const HomeStack = createBottomTabNavigator(
         marginBottom: 7,
       },
     },
-    initialRouteName: 'Dashboard',
   }
 );
 
-export default createAppContainer(HomeStack);
+export default createAppContainer(HomeTab);

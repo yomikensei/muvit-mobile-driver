@@ -14,7 +14,7 @@ export default props => {
         <View style={{ ...BaseStyles.dashSummaryBox, marginBottom: RFValue(17) }}>
           <View>
             <MediumText customstyle={{ fontSize: RFValue(12), color: 'rgba(255,255,255,0.8)' }}>
-              Balance
+              Pending Amount
             </MediumText>
             <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>5,000</BoldText>
           </View>
@@ -27,7 +27,7 @@ export default props => {
         <View style={{ ...BaseStyles.dashSummaryBox, marginBottom: RFValue(17) }}>
           <View>
             <MediumText customstyle={{ fontSize: RFValue(12), color: 'rgba(255,255,255,0.8)' }}>
-              Pending amount
+              Total Profit Made
             </MediumText>
             <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>22,500</BoldText>
           </View>
@@ -43,6 +43,7 @@ export default props => {
           </BoldText>
         </View>
       </View>
+
       <View style={BaseStyles.dashContent}>
         <ScrollView showsVerticalScrollIndicator={false}>
           <AccountItem

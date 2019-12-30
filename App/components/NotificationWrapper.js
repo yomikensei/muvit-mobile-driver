@@ -16,7 +16,7 @@ export default WrappedComponent => class NotificationWrapper extends React.PureC
   render() {
     PushNotification.configure({
       onNotification(notification) {
-        console.log('notification', notification);
+        console.log('notification', notification);N
         PushNotification.localNotification({
           largeIcon: 'ic_launcher',
           smallIcon: 'ic_launcher_round',

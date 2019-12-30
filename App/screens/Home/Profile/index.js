@@ -15,6 +15,7 @@ const Profile = props => {
     user: { firstname, lastname, email, phone, id },
     logout: Logout,
     navigation,
+    navigation: { navigate },
   } = props;
   return (
     <View style={BaseStyles.background}>
@@ -62,9 +63,21 @@ const Profile = props => {
         {email}
       </RegularText>
       <View style={{ paddingHorizontal: RFValue(24) }}>
-        <Action backgroundColor="#1969C5" title="Edit Profile" />
-        <Action backgroundColor="#1969C5" title="Change Password" />
-        <Action backgroundColor="#1969C5" title="Help / Support" />
+        <Action
+          backgroundColor="#1969C5"
+          title="Edit Profile"
+          action={() => navigate('EditProfile')}
+        />
+        <Action
+          backgroundColor="#1969C5"
+          title="Change Password"
+          action={() => navigate('ChangePassword')}
+        />
+        <Action
+          backgroundColor="#1969C5"
+          title="Manage Vehicle"
+          action={() => navigate('ManageVehicle')}
+        />
         <Action backgroundColor="#BD0000" title="Logout" action={Logout} />
       </View>
     </View>
