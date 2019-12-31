@@ -5,9 +5,11 @@ export const signupRequest = ({ credentials }) => ({
   credentials,
 });
 
-export const signupSuccess = ({ authInfo }) => ({
+export const signupSuccess = ({ authInfo, device, wallet }) => ({
   type: types.SIGNUP_SUCCESS,
   authInfo,
+  device,
+  wallet,
 });
 
 export const signupFailure = ({ error }) => ({
@@ -20,9 +22,11 @@ export const loginRequest = ({ credentials }) => ({
   credentials,
 });
 
-export const loginSuccess = ({ authInfo }) => ({
+export const loginSuccess = ({ authInfo, device, wallet }) => ({
   type: types.LOGIN_SUCCESS,
   authInfo,
+  device,
+  wallet,
 });
 
 export const loginFailure = ({ error }) => ({

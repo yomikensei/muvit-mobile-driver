@@ -7,7 +7,7 @@ import Snackbar from 'react-native-snackbar';
 
 import * as types from './constants';
 import * as actions from './actions';
-import api from '../api';
+import api from 'services/api';
 import { saveState } from '../../localStorage';
 
 function* login({ credentials }) {
@@ -16,7 +16,7 @@ function* login({ credentials }) {
     const os = yield DeviceInfo.getBaseOs();
     const os_api_level = yield DeviceInfo.getApiLevel();
     const manufacturer = yield DeviceInfo.getManufacturer();
-    const device = {
+    const _device = {
       fcm_token,
       manufacturer,
       model: DeviceInfo.getModel(),
@@ -28,14 +28,14 @@ function* login({ credentials }) {
 
     const {
       data: {
-        data: { user, token },
+        data: { user, token, device, wallet },
       },
     } = yield call(api, {
       url: '/user/login',
-      data: { ...credentials, role: ['user', 'driver'], device },
+      data: { ...credentials, device: _device },
       method: 'post',
     });
-    yield put(actions.loginSuccess({ authInfo: { user } }));
+    yield put(actions.loginSuccess({ authInfo: { user }, device, wallet }));
     yield saveState({ user, token });
     yield put(
       NavigationActions.navigate({
@@ -58,7 +58,7 @@ function* signup({ credentials }) {
     const os = yield DeviceInfo.getBaseOs();
     const os_api_level = yield DeviceInfo.getApiLevel();
     const manufacturer = yield DeviceInfo.getManufacturer();
-    const device = {
+    const _device = {
       fcm_token,
       manufacturer,
       model: DeviceInfo.getModel(),
@@ -70,15 +70,15 @@ function* signup({ credentials }) {
 
     const {
       data: {
-        data: { user, token },
+        data: { user, token, device, wallet },
       },
     } = yield call(api, {
       url: '/user/signup',
-      data: { ...credentials, role: ['user'], device },
+      data: { ...credentials, role: ['user', 'driver'], device: _device },
       method: 'post',
     });
 
-    yield put(actions.signupSuccess({ authInfo: { user } }));
+    yield put(actions.signupSuccess({ authInfo: { user }, device, wallet }));
     yield saveState({ user, token });
     yield put(
       NavigationActions.navigate({

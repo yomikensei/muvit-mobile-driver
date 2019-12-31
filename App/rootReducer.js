@@ -5,6 +5,8 @@ import FSStorage, { DocumentDir } from 'redux-persist-fs-storage';
 import { createNavigationReducer } from 'react-navigation-redux-helpers';
 
 import authReducer from 'services/auth/reducer';
+import walletReducer from 'services/wallet/reducer';
+import deviceReducer from 'services/device/reducer';
 import * as authTypes from 'services/auth/constants';
 
 import { AppWithNavigationState } from 'screens';
@@ -14,10 +16,10 @@ const storage = FSStorage(DocumentDir, 'muvit-driver');
 const entitiesReducer = (state, action) => {
   const reducer = combineReducers({
     auth: authReducer,
+    device: deviceReducer,
+    wallet: walletReducer,
   });
-  if (action.type === authTypes.LOGOUT) {
-    return reducer(undefined, action);
-  }
+  if (action.type === authTypes.LOGOUT) return reducer(undefined, action);
   return reducer(state, action);
 };
 
