@@ -26,7 +26,7 @@ export default ({ backgroundColor, account_number, account_name, bank }) => {
         </RegularText>
         <RegularText customstyle={{ color: '#FFF', fontSize: RFValue(14) }}>{bank}</RegularText>
       </View>
-      <TouchableOpacity>con
+      <TouchableOpacity>
         <Image
           source={require('../../../../assets/icons/exit2.png')}
           style={{ width: RFValue(20), height: RFValue(20) }}

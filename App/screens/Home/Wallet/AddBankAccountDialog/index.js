@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { View, Dimensions, TouchableOpacity, ActivityIndicator, Alert } from 'react-native';
-import { MediumText } from 'components/Text';
+import { MediumText, RegularText } from 'components/Text';
 import Modal from 'react-native-modal';
 import BaseStyles from 'theme/base';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -10,7 +10,6 @@ import PickerInput from 'components/PickerInput';
 import api from 'services/api';
 import Snackbar from 'react-native-snackbar';
 import Colors from 'theme/colors';
-import { RegularText } from 'components/Text';
 
 const { height, width } = Dimensions.get('window');
 
