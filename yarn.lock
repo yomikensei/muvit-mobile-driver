@@ -5919,7 +5919,7 @@ prompts@^2.0.1:
     kleur "^3.0.3"
     sisteransi "^1.0.3"
 
-prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
+prop-types@^15.5.10, prop-types@^15.6.1, prop-types@^15.6.2, prop-types@^15.7.2:
   version "15.7.2"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.7.2.tgz#52c41e75b8c87e72b9d9360e0206b99dcbffa6c5"
   integrity sha512-8QQikdH7//R2vurIJSutZ1smHYTcLpRWEOlHnzcWHmBYrOGUysKwSsrC89BCiFj3CbrfJ/nXFdJepOVrY1GCHQ==
@@ -6019,6 +6019,13 @@ react-native-device-info@^5.4.0:
   version "5.4.0"
   resolved "https://registry.yarnpkg.com/react-native-device-info/-/react-native-device-info-5.4.0.tgz#c837afdfc7947eef0a09c1bf2f3beb127d31458b"
   integrity sha512-57IZQ7IavRlNZvI1cKypMkjRPa7nmLK6jYVSrvPMYX2VrCszmgJKlP90cZZaX0FObtNt1yYuKAOkBqyjkNrTIA==
+
+react-native-fab@^1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/react-native-fab/-/react-native-fab-1.0.9.tgz#6f8c8982c55c4aa8e4d5b7fe55e08dc7ca4deb31"
+  integrity sha512-/wIFBPbkc3toZre4H4G4XMAAjIJ639k7S8EVQ7+8RHwVk7qc2H5Go4PaU5Z6o9D2vsmDs+Q7kWaqRAk9Ryh4ew==
+  dependencies:
+    prop-types "^15.5.10"
 
 react-native-fs@^2.14.1, react-native-fs@^2.16.2:
   version "2.16.2"

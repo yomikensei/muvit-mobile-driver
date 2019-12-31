@@ -1,15 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import { View, TouchableOpacity } from 'react-native';
 import BaseStyles from 'theme/base';
 import { MediumText, BoldText } from 'components/Text';
 import { RFValue } from 'react-native-responsive-fontsize';
+import { getTotalProfit } from 'services/wallet/reducer';
+import { currencyFormatter } from 'util';
+
 import colors from 'theme/colors';
 
-export default props => {
+const DashBoard = props => {
   const [tab, setTab] = useState('RIDES');
 
   const {
     navigation: { navigate },
+    total_profit,
   } = props;
   return (
     <View style={BaseStyles.dashBackground}>
@@ -19,12 +24,11 @@ export default props => {
             <MediumText customstyle={{ fontSize: RFValue(12), color: 'rgba(255,255,255,0.8)' }}>
               Total Profit Made
             </MediumText>
-            <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>50,000</BoldText>
+            <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>
+              {currencyFormatter(total_profit)}
+            </BoldText>
           </View>
-          <TouchableOpacity
-            onPress={() => navigate('Wallet')}
-            style={BaseStyles.button2}
-          >
+          <TouchableOpacity onPress={() => navigate('Wallet')} style={BaseStyles.button2}>
             <BoldText customstyle={{ fontSize: RFValue(10), color: colors.primary }}>View</BoldText>
           </TouchableOpacity>
         </View>
@@ -72,3 +76,9 @@ export default props => {
     </View>
   );
 };
+
+const mapStateToProps = state => ({
+  total_profit: getTotalProfit(state),
+});
+
+export default connect(mapStateToProps)(DashBoard);

@@ -11,7 +11,6 @@ function* fetchWallet() {
       method: 'GET',
       url: '/wallet',
     });
-    console.log(wallet);
     yield put(actions.fetchWalletSuccess({ wallet }));
   } catch (e) {
     console.log(e.response ? e.response : e);

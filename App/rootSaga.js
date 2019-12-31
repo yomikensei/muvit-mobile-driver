@@ -27,7 +27,7 @@ async function requestApplicationPermissions() {
 }
 
 export function* fetchData() {
-  yield fetchWalletRequest();
+  yield put(fetchWalletRequest());
 }
 
 function* pullData() {
@@ -47,7 +47,7 @@ function* pushData() {
     if (isLoggedIn) {
       const _fcm_token = yield select(getFCMToken);
       const fcm_token = yield firebase.messaging().getToken();
-      if (_fcm_token !== fcm_token) yield updateDeviceRequest();
+      if (_fcm_token !== fcm_token) yield put(updateDeviceRequest());
     }
 
     yield delay(1000 * 60 * 5);

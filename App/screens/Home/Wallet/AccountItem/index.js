@@ -19,14 +19,14 @@ export default ({ backgroundColor, account_number, account_name, bank }) => {
         marginBottom: RFValue(14),
       }}
     >
-      <View>
+      <View style={{ width: '80%' }}>
         <BoldText customstyle={{ color: '#FFF', fontSize: RFValue(25) }}>{account_number}</BoldText>
-        <RegularText customstyle={{ color: '#FFF', fontSize: RFValue(14) }}>
+        <RegularText numberOfLines={1} customstyle={{ color: '#FFF', fontSize: RFValue(14) }}>
           {account_name}
         </RegularText>
         <RegularText customstyle={{ color: '#FFF', fontSize: RFValue(14) }}>{bank}</RegularText>
       </View>
-      <TouchableOpacity>
+      <TouchableOpacity>con
         <Image
           source={require('../../../../assets/icons/exit2.png')}
           style={{ width: RFValue(20), height: RFValue(20) }}

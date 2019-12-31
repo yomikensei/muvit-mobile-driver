@@ -1,13 +1,51 @@
-import React from 'react';
-import { View, TouchableOpacity, ScrollView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, TouchableOpacity, ScrollView, ActivityIndicator, FlatList } from 'react-native';
+import { connect } from 'react-redux';
+import FAB from 'react-native-fab';
+import Icon from 'react-native-vector-icons/FontAwesome5';
+import { schemeDark2 } from 'd3-scale-chromatic';
 import { RegularText, MediumText, BoldText } from 'components/Text';
 import BaseStyles from 'theme/base';
-import AccountItem from './AccountItem';
 import { RFValue } from 'react-native-responsive-fontsize';
+import AccountItem from './AccountItem';
+import { getTotalProfit, getBalance } from 'services/wallet/reducer';
+import { currencyFormatter } from 'util';
 import colors from 'theme/colors';
+import api from 'services/api';
+import Colors from 'theme/colors';
+import AddBankAccountDialog from './AddBankAccountDialog';
 
-export default props => {
-  console.log(props);
+const Wallet = props => {
+  const [bankAccounts, setBankAccounts] = useState({});
+  const [isLoading, setIsLoading] = useState(false);
+  const [showAddBankAccountDialog, setShowAddBankAccountDialog] = useState(false);
+
+  const fetchBankAccounts = async () => {
+    setIsLoading(true);
+    try {
+      const {
+        data: { data },
+      } = await api({
+        url: '/bank-account',
+        method: 'GET',
+      });
+      const _data = {};
+      data.forEach(item => {
+        _data[item.id] = item;
+      });
+      setBankAccounts(_data);
+    } catch (e) {
+      console.log(e.response ? e.response : e);
+    }
+    setIsLoading(false);
+  };
+
+  const { balance, total_profit } = props;
+
+  useEffect(() => {
+    fetchBankAccounts();
+  }, []);
+
   return (
     <View style={BaseStyles.dashBackground}>
       <View style={BaseStyles.dashTop}>
@@ -16,7 +54,9 @@ export default props => {
             <MediumText customstyle={{ fontSize: RFValue(12), color: 'rgba(255,255,255,0.8)' }}>
               Pending Amount
             </MediumText>
-            <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>5,000</BoldText>
+            <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>
+              {currencyFormatter(balance)}
+            </BoldText>
           </View>
           <TouchableOpacity style={BaseStyles.button2}>
             <BoldText customstyle={{ fontSize: RFValue(10), color: colors.primary }}>
@@ -29,7 +69,9 @@ export default props => {
             <MediumText customstyle={{ fontSize: RFValue(12), color: 'rgba(255,255,255,0.8)' }}>
               Total Profit Made
             </MediumText>
-            <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>22,500</BoldText>
+            <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>
+              {currencyFormatter(total_profit)}
+            </BoldText>
           </View>
         </View>
         <View
@@ -43,35 +85,48 @@ export default props => {
           </BoldText>
         </View>
       </View>
-
       <View style={BaseStyles.dashContent}>
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <AccountItem
-            backgroundColor={colors.primary}
-            account_number="0006566463"
-            account_name="Test Driver"
-            bank="Access Bank"
-          />
-          <AccountItem
-            backgroundColor={colors.primary}
-            account_number="0006566463"
-            account_name="Test Driver"
-            bank="Access Bank"
-          />
-          <AccountItem
-            backgroundColor={colors.primary}
-            account_number="0006566463"
-            account_name="Test Driver"
-            bank="Access Bank"
-          />
-          <AccountItem
-            backgroundColor={colors.primary}
-            account_number="0006566463"
-            account_name="Test Driver"
-            bank="Access Bank"
-          />
-        </ScrollView>
+        {isLoading ? (
+          <ActivityIndicator size={30} color={Colors.primary} />
+        ) : (
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <FlatList
+              refreshing={isLoading && Object.values(bankAccounts).length === 0}
+              data={Object.values(bankAccounts)}
+              renderItem={({ item, index }) => (
+                <AccountItem {...{ ...item, backgroundColor: schemeDark2[index % 12] }} />
+              )}
+              keyExtractor={item => item.id}
+              ListEmptyComponent={() => (
+                <RegularText>
+                  No bank accounts available, you can add one by clicking the button in the bottom
+                  right
+                </RegularText>
+              )}
+              onRefresh={fetchBankAccounts}
+            />
+          </ScrollView>
+        )}
       </View>
+      <AddBankAccountDialog
+        isShown={showAddBankAccountDialog}
+        close={() => setShowAddBankAccountDialog(false)}
+        fetchBankAccounts={fetchBankAccounts}
+      />
+      <FAB
+        visible
+        onClickAction={() => setShowAddBankAccountDialog(true)}
+        buttonColor={Colors.primary}
+        iconTextColor="#FFFFFF"
+        iconTextComponent={<Icon name="plus" />}
+      />
     </View>
   );
 };
+
+const mapStateToProps = state => ({
+  total_profit: getTotalProfit(state),
+  balance: getBalance(state),
+});
+
+export default connect(mapStateToProps)(Wallet);
