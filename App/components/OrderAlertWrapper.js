@@ -5,10 +5,10 @@ import {getOrderDetails, getOrderId, getOrderStage, getOrderType} from 'services
 
 export default WrappedComponent =>
   connect(mapStateToProps)(props => {
-    const { navigation, details, stage, id, type } = props;
+    const { details, stage, id, type, dispatch } = props;
     return (
       <>
-        <DeliveryAlert {...{ show: stage === 'PENDING', navigation, details, stage, id, type }} />
+        <DeliveryAlert {...{ show: stage === 'PENDING', dispatch, details, stage, id, type }} />
         <WrappedComponent />
       </>
     );
