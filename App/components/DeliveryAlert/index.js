@@ -1,14 +1,22 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, TouchableOpacity, Image } from 'react-native';
+import React from 'react';
+import {StyleSheet, TouchableOpacity, View} from 'react-native';
 import Modal from 'react-native-modal';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { BoldText } from 'components/Text';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {BoldText, RegularText} from 'components/Text';
 import * as Animatable from 'react-native-animatable';
 
 export default props => {
+  const {
+    show,
+    type,
+    details: { message },
+  } = props;
+  const acceptOrder = async () => {};
+  const rejectOrder = async () => {};
+
   return (
     <Modal
-      isVisible={props.show}
+      isVisible={show}
       style={{ justifyContent: 'flex-end', zIndex: 99999999999999999 }}
       onBackButtonPress={() => {}}
       onBackdropPress={() => {}}
@@ -35,15 +43,20 @@ export default props => {
           }}
         />
         <BoldText
-          customstyle={{ fontSize: RFValue(25), textAlign: 'center', marginBottom: RFValue(26) }}
+          customstyle={{ fontSize: RFValue(23), textAlign: 'center', marginBottom: RFValue(10) }}
         >
-          New Delivery Order
+          {`NEW ${type} ORDER`}
         </BoldText>
+        <RegularText
+          customstyle={{ fontSize: RFValue(17), textAlign: 'center', marginBottom: RFValue(26) }}
+        >
+          {message}
+        </RegularText>
         <View
           style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
         >
           <TouchableOpacity
-            onPress={props.onAccept}
+            onPress={acceptOrder}
             style={{
               width: '48%',
               height: RFValue(66),
@@ -56,7 +69,7 @@ export default props => {
             <BoldText customstyle={{ fontSize: RFValue(18), color: '#FFF' }}>ACCEPT</BoldText>
           </TouchableOpacity>
           <TouchableOpacity
-            onPress={props.onDecline}
+            onPress={rejectOrder}
             style={{
               width: '48%',
               height: RFValue(66),
@@ -77,10 +90,10 @@ export default props => {
 const QCStyle = StyleSheet.create({
   container: {
     width: '100%',
-    height: RFValue(292),
     borderRadius: RFValue(10),
     backgroundColor: '#FFF',
     paddingHorizontal: RFValue(30),
-    paddingTop: RFValue(36),
+    padding: RFValue(20),
+    paddingTop: RFValue(30),
   },
 });

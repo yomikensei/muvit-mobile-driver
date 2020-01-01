@@ -5,8 +5,9 @@ import FSStorage, { DocumentDir } from 'redux-persist-fs-storage';
 import { createNavigationReducer } from 'react-navigation-redux-helpers';
 
 import authReducer from 'services/auth/reducer';
-import walletReducer from 'services/wallet/reducer';
 import deviceReducer from 'services/device/reducer';
+import ordersReducer from 'services/orders/reducer';
+import walletReducer from 'services/wallet/reducer';
 import * as authTypes from 'services/auth/constants';
 
 import { AppWithNavigationState } from 'screens';
@@ -17,6 +18,7 @@ const entitiesReducer = (state, action) => {
   const reducer = combineReducers({
     auth: authReducer,
     device: deviceReducer,
+    orders: ordersReducer,
     wallet: walletReducer,
   });
   if (action.type === authTypes.LOGOUT) return reducer(undefined, action);
