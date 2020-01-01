@@ -1,5 +1,5 @@
-import PushNotification from 'react-native-push-notification';
 import React from 'react';
+import PushNotification from 'react-native-push-notification';
 import { firebase } from '@react-native-firebase/messaging';
 
 export default WrappedComponent => class NotificationWrapper extends React.PureComponent {
@@ -16,7 +16,7 @@ export default WrappedComponent => class NotificationWrapper extends React.PureC
   render() {
     PushNotification.configure({
       onNotification(notification) {
-        console.log('notification', notification);N
+        console.log('notification', notification);
         PushNotification.localNotification({
           largeIcon: 'ic_launcher',
           smallIcon: 'ic_launcher_round',
