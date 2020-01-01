@@ -11,7 +11,7 @@ export default WrappedComponent =>
         desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
         stationaryRadius: 0,
         distanceFilter: 0,
-        notificationTitle: '',
+        notificationTitle: 'Background GeoTracking',
         notificationText: '',
         startForeground: true,
         startOnBoot: true,

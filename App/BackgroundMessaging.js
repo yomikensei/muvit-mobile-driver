@@ -3,15 +3,7 @@
 import PushNotification from 'react-native-push-notification';
 
 export default async notification => {
-  console.log('432423', notification);
-  PushNotification.localNotification({
-    largeIcon: 'ic_launcher',
-    smallIcon: 'ic_launcher_round',
-    vibration: 300,
-    title: 'New Delivery',
-    // message: data.body,
-    // tag,
-  });
+  console.log('Background Messaging service notification', notification);
 
   return Promise.resolve();
 };

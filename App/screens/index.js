@@ -3,6 +3,7 @@ import { createReduxContainer } from 'react-navigation-redux-helpers';
 import { connect } from 'react-redux';
 import NotificationWrapper from 'components/NotificationWrapper';
 import BackgroundLocationWrapper from 'components/BackgroundLocationWrapper';
+import OrderAlertWrapper from 'components/OrderAlertWrapper';
 
 import AuthStack from './Auth';
 import HomeTab from './Home';
@@ -63,4 +64,6 @@ const mapStateToProps = state => ({
 
 export const AppWithNavigationState = connect(mapStateToProps)(createReduxContainer(AppNavigator));
 
-export default BackgroundLocationWrapper(NotificationWrapper(AppWithNavigationState));
+export default OrderAlertWrapper(
+  BackgroundLocationWrapper(NotificationWrapper(AppWithNavigationState))
+);
