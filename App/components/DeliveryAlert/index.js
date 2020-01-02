@@ -27,7 +27,6 @@ export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
         url: `/ride/reject/${id}`,
         method: 'PUT',
       });
-      console.log(data);
       props.rejectOrder();
     } catch (e) {
       console.log(e.response ? e.response : e);
@@ -42,8 +41,6 @@ export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
         url: `/ride/accept/${id}`,
         method: 'PUT',
       });
-      console.log(data);
-
       props.acceptOrder();
       dispatch(NavigationActions.navigate({ routeName: 'OngoingOrder' }));
     } catch (e) {

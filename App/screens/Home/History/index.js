@@ -60,9 +60,6 @@ export default props => {
     fetchRides();
     fetchDeliveries();
   }, []);
-  
-  console.log(rides);
-  console.log(deliveries);
 
   const { navigation } = props;
   return (

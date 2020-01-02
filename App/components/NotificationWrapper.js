@@ -1,16 +1,14 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import {connect} from 'react-redux';
 import PushNotification from 'react-native-push-notification';
-import { firebase } from '@react-native-firebase/messaging';
-import { newOrder } from 'services/orders/actions';
+import {firebase} from '@react-native-firebase/messaging';
+import {newOrder} from 'services/orders/actions';
 
 export default WrappedComponent =>
   connect(mapStateToProps, { newOrder })(
     class NotificationWrapper extends React.PureComponent {
       componentDidMount() {
-        this.messageListener = firebase.messaging().onMessage(message => {
-          console.log('message', message);
-        });
+        this.messageListener = firebase.messaging().onMessage(message => {});
       }
 
       render() {
@@ -47,7 +45,6 @@ export default WrappedComponent =>
               default:
                 if (!notification.tag) break;
                 const tag = JSON.parse(notification.tag);
-                console.log(tag);
                 switch (tag.action) {
                   case 'NEW_RIDE_REQUEST':
                     self.props.newOrder({
@@ -60,7 +57,13 @@ export default WrappedComponent =>
                     break;
 
                   case 'NEW_DELIVERY_REQUEST':
-                    console.log("There's a new delivery for you baba");
+                    self.props.newOrder({
+                      order_details: {
+                        message: notification.message,
+                      },
+                      order_id: tag.model_id,
+                      order_type: 'DELIVERY',
+                    });
                     break;
 
                   default:
