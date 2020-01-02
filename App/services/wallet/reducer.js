@@ -5,6 +5,7 @@ const initialState = {
   wallet: {
     balance: 0,
     total_profit: 0,
+    next_withdrawal: null,
   },
   fetchWallet: {
     inProgress: false,
@@ -22,7 +23,7 @@ export default (state = initialState, action) => {
           inProgress: true,
         },
       };
-      
+
     case authTypes.LOGIN_SUCCESS:
     case authTypes.SIGNUP_SUCCESS:
     case types.FETCH_WALLET_SUCCESS:
@@ -48,9 +49,7 @@ export default (state = initialState, action) => {
   }
 };
 
-
 export const getWallet = state => state.app.entities.wallet.wallet;
-
-export const getBalance  = state => state.app.entities.wallet.balance;
-
-export const getTotalProfit = state => state.app.entities.wallet.total_profit;
+export const getBalance = state => state.app.entities.wallet.wallet.balance;
+export const getTotalProfit = state => state.app.entities.wallet.wallet.total_profit;
+export const getNextWithdrawalDate = state => state.app.entities.wallet.wallet.next_withdrawal;

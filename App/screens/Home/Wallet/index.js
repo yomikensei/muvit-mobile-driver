@@ -1,18 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { View, TouchableOpacity, ScrollView, ActivityIndicator, FlatList } from 'react-native';
-import { connect } from 'react-redux';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, FlatList, ScrollView, TouchableOpacity, View} from 'react-native';
+import {connect} from 'react-redux';
 import FAB from 'react-native-fab';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { schemeDark2 } from 'd3-scale-chromatic';
-import { RegularText, MediumText, BoldText } from 'components/Text';
+import {schemeDark2} from 'd3-scale-chromatic';
+import moment from 'moment';
+import {BoldText, MediumText, RegularText} from 'components/Text';
 import BaseStyles from 'theme/base';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {RFValue} from 'react-native-responsive-fontsize';
 import AccountItem from './AccountItem';
-import { getTotalProfit, getBalance } from 'services/wallet/reducer';
-import { currencyFormatter } from 'util';
+import {getBalance, getNextWithdrawalDate, getTotalProfit} from 'services/wallet/reducer';
+import {currencyFormatter} from 'util';
 import colors from 'theme/colors';
-import api from 'services/api';
 import Colors from 'theme/colors';
+import api from 'services/api';
 import AddBankAccountDialog from './AddBankAccountDialog';
 
 const Wallet = props => {
@@ -40,7 +41,7 @@ const Wallet = props => {
     setIsLoading(false);
   };
 
-  const { balance, total_profit } = props;
+  const { balance, total_profit, next_withdrawal } = props;
 
   useEffect(() => {
     fetchBankAccounts();
@@ -55,14 +56,16 @@ const Wallet = props => {
               Pending Amount
             </MediumText>
             <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>
-              {currencyFormatter(balance)}
+              {`₦ ${currencyFormatter(balance)}`}
             </BoldText>
           </View>
-          <TouchableOpacity style={BaseStyles.button2}>
-            <BoldText customstyle={{ fontSize: RFValue(10), color: colors.primary }}>
-              Withdraw
-            </BoldText>
-          </TouchableOpacity>
+          {props.next_withdrawal && !moment().isAfter(moment(next_withdrawal)) && (
+            <TouchableOpacity style={BaseStyles.button2}>
+              <BoldText customstyle={{ fontSize: RFValue(10), color: colors.primary }}>
+                Withdraw
+              </BoldText>
+            </TouchableOpacity>
+          )}
         </View>
         <View style={{ ...BaseStyles.dashSummaryBox, marginBottom: RFValue(17) }}>
           <View>
@@ -70,20 +73,23 @@ const Wallet = props => {
               Total Profit Made
             </MediumText>
             <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>
-              {currencyFormatter(total_profit)}
+              {`₦ ${currencyFormatter(total_profit)}`}
             </BoldText>
           </View>
         </View>
-        <View
-          style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
-        >
-          <RegularText customstyle={{ color: 'rgba(255,255,255,0.6)', fontSize: RFValue(12) }}>
-            next payment date
-          </RegularText>
-          <BoldText customstyle={{ color: '#FFF', fontSize: RFValue(12) }}>
-            Monday, 28th August 2019
-          </BoldText>
-        </View>
+
+        {props.next_withdrawal && !moment().isAfter(moment(next_withdrawal)) && (
+          <View
+            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
+          >
+            <RegularText customstyle={{ color: 'rgba(255,255,255,0.6)', fontSize: RFValue(12) }}>
+              next payment date
+            </RegularText>
+            <BoldText customstyle={{ color: '#FFF', fontSize: RFValue(12) }}>
+              {moment(next_withdrawal).format('dddd, MMMM Do YYYY, h:mm a')}
+            </BoldText>
+          </View>
+        )}
       </View>
       <View style={BaseStyles.dashContent}>
         {isLoading ? (
@@ -127,6 +133,7 @@ const Wallet = props => {
 const mapStateToProps = state => ({
   total_profit: getTotalProfit(state),
   balance: getBalance(state),
+  next_withdrawal: getNextWithdrawalDate(state),
 });
 
 export default connect(mapStateToProps)(Wallet);

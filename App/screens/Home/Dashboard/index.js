@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
-import { View, TouchableOpacity } from 'react-native';
+import React, {useState} from 'react';
+import {connect} from 'react-redux';
+import {TouchableOpacity, View} from 'react-native';
 import BaseStyles from 'theme/base';
-import { MediumText, BoldText } from 'components/Text';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { getTotalProfit } from 'services/wallet/reducer';
-import { currencyFormatter } from 'util';
+import {BoldText, MediumText} from 'components/Text';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {getTotalProfit} from 'services/wallet/reducer';
+import {currencyFormatter} from 'util';
 
 import colors from 'theme/colors';
 
@@ -16,6 +16,8 @@ const DashBoard = props => {
     navigation: { navigate },
     total_profit,
   } = props;
+
+  console.log(total_profit);
   return (
     <View style={BaseStyles.dashBackground}>
       <View style={BaseStyles.dashTop}>
@@ -25,7 +27,7 @@ const DashBoard = props => {
               Total Profit Made
             </MediumText>
             <BoldText customstyle={{ fontSize: RFValue(35), color: '#FFF' }}>
-              {currencyFormatter(total_profit)}
+              {`₦ ${currencyFormatter(total_profit)}`}
             </BoldText>
           </View>
           <TouchableOpacity onPress={() => navigate('Wallet')} style={BaseStyles.button2}>
