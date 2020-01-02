@@ -101,7 +101,11 @@ export default connect(mapStateToProps, { commenceOrder, completeOrder })(props 
 
   return (
     <View style={BaseStyles.background}>
-      <DashNav title="Ongoing Order" info="Details on current ride or delivery" />
+      <DashNav
+        showBackButton={props.stage === 'COMPLETE'}
+        title="Ongoing Order"
+        info="Details on current ride or delivery"
+      />
 
       <ScrollView showsVerticalScrollIndicator={false}>
         <View style={{ marginTop: RFValue(10) }}>

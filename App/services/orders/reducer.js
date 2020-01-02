@@ -26,8 +26,10 @@ export default (state = initialState, action) => {
       };
 
     case types.COMPLETE_ORDER:
+      return { ...initialState, order_type: state.order_type, stage: 'COMPLETE' };
+
     case types.REJECT_ORDER:
-      return { ...initialState, order_type: state.order_type };
+      return initialState;
 
     case types.COMMENCE_ORDER:
       return {
