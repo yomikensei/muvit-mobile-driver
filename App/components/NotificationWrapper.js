@@ -1,8 +1,8 @@
 import React from 'react';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import PushNotification from 'react-native-push-notification';
-import {firebase} from '@react-native-firebase/messaging';
-import {newOrder} from 'services/orders/actions';
+import { firebase } from '@react-native-firebase/messaging';
+import { newOrder } from 'services/orders/actions';
 
 export default WrappedComponent =>
   connect(mapStateToProps, { newOrder })(
@@ -57,7 +57,6 @@ export default WrappedComponent =>
                       order_id: tag.model_id,
                       order_type: 'RIDE',
                     });
-                    console.log("There's a new ride for you baba");
                     break;
 
                   case 'NEW_DELIVERY_REQUEST':

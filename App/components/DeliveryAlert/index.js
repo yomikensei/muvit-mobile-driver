@@ -32,7 +32,7 @@ export default connect(mapStateToProps, { rejectOrder })(props => {
     } catch (e) {
       console.log(e.response ? e.response : e);
     }
-    setIsLoading(true);
+    setIsLoading(false);
   };
 
   return (
