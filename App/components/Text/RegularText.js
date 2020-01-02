@@ -1,7 +1,7 @@
-import React from "react";
-import { Text, StyleSheet } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import Colors from '../../shared/theme/colors';
+import React from 'react';
+import {StyleSheet, Text} from 'react-native';
+import {RFValue} from 'react-native-responsive-fontsize';
+import Colors from 'theme/colors';
 
 /**
  * @RegularText Component
@@ -18,8 +18,8 @@ export default props => {
 
 const styles = StyleSheet.create({
   defaultStyles: {
-    fontFamily: "DMSans-Regular",
+    fontFamily: 'DMSans-Regular',
     fontSize: RFValue(16),
-    color: Colors.black
-  }
+    color: Colors.black,
+  },
 });

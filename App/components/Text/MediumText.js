@@ -1,7 +1,7 @@
 import React from "react";
-import { Text, StyleSheet } from "react-native";
-import { RFValue } from "react-native-responsive-fontsize";
-import Colors from '../../shared/theme/colors';
+import {StyleSheet, Text} from "react-native";
+import {RFValue} from "react-native-responsive-fontsize";
+import Colors from 'theme/colors';
 
 /**
  * @RegularText Component
