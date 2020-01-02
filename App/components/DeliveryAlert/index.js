@@ -6,22 +6,22 @@ import {RFValue} from 'react-native-responsive-fontsize';
 import {BoldText, RegularText} from 'components/Text';
 import * as Animatable from 'react-native-animatable';
 import api from 'services/api';
-import {rejectOrder} from 'services/orders/actions';
+import {acceptOrder, rejectOrder} from 'services/orders/actions';
 import Colors from 'theme/colors';
+import {NavigationActions} from 'react-navigation';
 
-export default connect(mapStateToProps, { rejectOrder })(props => {
+export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
   const [isLoading, setIsLoading] = useState(false);
   const {
     show,
     type,
     id,
     details: { message },
+    dispatch,
   } = props;
-
-  const acceptOrder = async () => {};
-
-  const rejectOrder = async () => {
-    setIsLoading(false);
+  
+  const _rejectOrder = async () => {
+    setIsLoading(true);
     try {
       const { data } = await api({
         url: `/ride/reject/${id}`,
@@ -29,6 +29,23 @@ export default connect(mapStateToProps, { rejectOrder })(props => {
       });
       console.log(data);
       props.rejectOrder();
+    } catch (e) {
+      console.log(e.response ? e.response : e);
+    }
+    setIsLoading(false);
+  };
+
+  const _acceptOrder = async () => {
+    setIsLoading(true);
+    try {
+      const { data } = await api({
+        url: `/ride/accept/${id}`,
+        method: 'PUT',
+      });
+      console.log(data);
+
+      props.acceptOrder();
+      dispatch(NavigationActions.navigate({ routeName: 'OngoingOrder' }));
     } catch (e) {
       console.log(e.response ? e.response : e);
     }
@@ -81,7 +98,7 @@ export default connect(mapStateToProps, { rejectOrder })(props => {
           ) : (
             <>
               <TouchableOpacity
-                onPress={acceptOrder}
+                onPress={_acceptOrder}
                 style={{
                   width: '48%',
                   height: RFValue(66),
@@ -94,7 +111,7 @@ export default connect(mapStateToProps, { rejectOrder })(props => {
                 <BoldText customstyle={{ fontSize: RFValue(18), color: '#FFF' }}>ACCEPT</BoldText>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={rejectOrder}
+                onPress={_rejectOrder}
                 style={{
                   width: '48%',
                   height: RFValue(66),

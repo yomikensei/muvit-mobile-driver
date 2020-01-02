@@ -1,7 +1,7 @@
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React, {useEffect} from 'react';
+import {connect} from 'react-redux';
 import BackgroundGeolocation from '@mauron85/react-native-background-geolocation';
-import { getIsLoggedIn } from 'services/auth/reducer';
+import {getIsLoggedIn} from 'services/auth/reducer';
 import api from 'services/api';
 
 export default WrappedComponent =>
@@ -9,8 +9,8 @@ export default WrappedComponent =>
     const configureBackgroundLocation = () => {
       BackgroundGeolocation.configure({
         desiredAccuracy: BackgroundGeolocation.HIGH_ACCURACY,
-        stationaryRadius: 0,
-        distanceFilter: 0,
+        stationaryRadius: 10,
+        distanceFilter: 10,
         notificationTitle: 'Background GeoTracking',
         notificationText: '',
         startForeground: true,

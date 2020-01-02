@@ -21,21 +21,17 @@ export default (state = initialState, action) => {
 
     case types.ACCEPT_ORDER:
       return {
-        order_details,
-        order_type,
-        order_id,
+        ...state,
         stage: 'ARRIVING',
       };
 
     case types.COMPLETE_ORDER:
     case types.REJECT_ORDER:
-      return initialState;
+      return { ...initialState, order_type: state.order_type };
 
     case types.COMMENCE_ORDER:
       return {
-        order_details,
-        order_type,
-        order_id,
+        ...state,
         stage: 'ONGOING',
       };
 

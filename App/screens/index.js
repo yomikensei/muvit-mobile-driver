@@ -1,6 +1,6 @@
-import { createAppContainer, createSwitchNavigator, createStackNavigator } from 'react-navigation';
-import { createReduxContainer } from 'react-navigation-redux-helpers';
-import { connect } from 'react-redux';
+import {createAppContainer, createStackNavigator, createSwitchNavigator} from 'react-navigation';
+import {createReduxContainer} from 'react-navigation-redux-helpers';
+import {connect} from 'react-redux';
 import NotificationWrapper from 'components/NotificationWrapper';
 import BackgroundLocationWrapper from 'components/BackgroundLocationWrapper';
 import OrderAlertWrapper from 'components/OrderAlertWrapper';
@@ -12,6 +12,7 @@ import AuthLoadingScreen from './AuthLoading';
 import ManageVehicleScreen from './Home/Profile/ManageVehicle';
 import ChangePasswordScreen from './Home/Profile/ChangePassword';
 import EditProfileScreen from './Home/Profile/EditProfile';
+import OngoingOrder from './Home/Orders/OngoingOrder';
 
 const HomeStack = createStackNavigator(
   {
@@ -35,6 +36,12 @@ const HomeStack = createStackNavigator(
     },
     ChangePassword: {
       screen: ChangePasswordScreen,
+      navigationOptions: () => ({
+        header: null,
+      }),
+    },
+    OngoingOrder: {
+      screen: OngoingOrder,
       navigationOptions: () => ({
         header: null,
       }),

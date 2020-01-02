@@ -7,22 +7,16 @@ export const newOrder = ({ order_details, order_type, order_id }) => ({
   order_id,
 });
 
-export const acceptOrder = ({ order_details, order_type, order_id }) => ({
+export const acceptOrder = () => ({
   type: types.ACCEPT_ORDER,
-  order_details,
-  order_type,
-  order_id,
 });
 
 export const rejectOrder = () => ({
   type: types.REJECT_ORDER,
 });
 
-export const commenceOrder = ({ order_details, order_type, order_id }) => ({
+export const commenceOrder = () => ({
   type: types.COMMENCE_ORDER,
-  order_details,
-  order_type,
-  order_id,
 });
 
 export const completeOrder = () => ({
