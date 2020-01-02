@@ -16,8 +16,7 @@ const DashBoard = props => {
     navigation: { navigate },
     total_profit,
   } = props;
-
-  console.log(total_profit);
+  
   return (
     <View style={BaseStyles.dashBackground}>
       <View style={BaseStyles.dashTop}>

@@ -1,13 +1,13 @@
 import React from 'react';
-import { connect } from 'react-redux';
-import { Image, TouchableOpacity, View } from 'react-native';
+import {connect} from 'react-redux';
+import {Image, TouchableOpacity, View} from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { getUser } from 'services/auth/reducer';
-import { logout } from 'services/auth/actions';
+import {getUser} from 'services/auth/reducer';
+import {logout} from 'services/auth/actions';
 import BaseStyles from 'theme/base';
 import DashNav from 'components/DashNav';
-import { RFValue } from 'react-native-responsive-fontsize';
-import { RegularText, BoldText } from 'components/Text';
+import {RFValue} from 'react-native-responsive-fontsize';
+import {BoldText, RegularText} from 'components/Text';
 import Colors from 'theme/colors.json';
 
 const Profile = props => {
@@ -63,11 +63,11 @@ const Profile = props => {
         {email}
       </RegularText>
       <View style={{ paddingHorizontal: RFValue(24) }}>
-        <Action
-          backgroundColor="#1969C5"
-          title="Edit Profile"
-          action={() => navigate('EditProfile')}
-        />
+        {/*<Action*/}
+        {/*  backgroundColor="#1969C5"*/}
+        {/*  title="Edit Profile"*/}
+        {/*  action={() => navigate('EditProfile')}*/}
+        {/*/>*/}
         <Action
           backgroundColor="#1969C5"
           title="Change Password"
