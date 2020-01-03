@@ -39,12 +39,18 @@ export default WrappedComponent =>
                   vibration: 300,
                   title: 'New Delivery request',
                   message: `${notification.name_origin} to ${notification.name_destination}`,
+                  tag: JSON.stringify({
+                    action: 'NEW_DELIVERY_REQUEST',
+                    model_id: notification.delivery,
+                    model: 'delivery',
+                  }),
                 });
                 break;
 
               default:
                 if (!notification.tag) break;
                 const tag = JSON.parse(notification.tag);
+                console.log(tag)
                 switch (tag.action) {
                   case 'NEW_RIDE_REQUEST':
                     self.props.newOrder({

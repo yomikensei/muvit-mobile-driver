@@ -30,9 +30,11 @@ export default props => {
         <BoldText customstyle={{ fontSize: RFValue(20) }}>{title}</BoldText>
         <View style={{ width: RFValue(20), height: RFValue(20) }} />
       </View>
-      <RegularText customstyle={{ color: '#B2B8BD', fontSize: RFValue(12), textAlign: 'center' }}>
-        {info}
-      </RegularText>
+      {info && (
+        <RegularText customstyle={{ color: '#B2B8BD', fontSize: RFValue(12), textAlign: 'center' }}>
+          {info}
+        </RegularText>
+      )}
     </View>
   );
 };

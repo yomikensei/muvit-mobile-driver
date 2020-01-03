@@ -10,6 +10,11 @@ import {acceptOrder, rejectOrder} from 'services/orders/actions';
 import Colors from 'theme/colors';
 import {NavigationActions} from 'react-navigation';
 
+
+const mapStateToProps = state => ({
+
+});
+
 export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
   const [isLoading, setIsLoading] = useState(false);
   const {
@@ -24,7 +29,7 @@ export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
     setIsLoading(true);
     try {
       const { data } = await api({
-        url: `/ride/reject/${id}`,
+        url: `/${type.toLowerCase()}/reject/${id}`,
         method: 'PUT',
       });
       props.rejectOrder();
@@ -38,7 +43,7 @@ export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
     setIsLoading(true);
     try {
       const { data } = await api({
-        url: `/ride/accept/${id}`,
+        url: `/${type.toLowerCase()}/accept/${id}`,
         method: 'PUT',
       });
       props.acceptOrder();
@@ -139,4 +144,3 @@ const QCStyle = StyleSheet.create({
   },
 });
 
-const mapStateToProps = state => ({});

@@ -4,6 +4,7 @@ import {ActivityIndicator, ScrollView, StyleSheet, TouchableOpacity, View} from 
 import {MediumText, RegularText} from 'components/Text';
 import DashNav from 'components/DashNav';
 import BaseStyles from 'theme/base';
+import {fetchWalletRequest} from 'services/wallet/actions';
 import {getOrderId, getOrderStage, getOrderType} from 'services/orders/reducer';
 import {commenceOrder, completeOrder} from 'services/orders/actions';
 import api from 'services/api';
@@ -31,7 +32,7 @@ const mapStateToProps = state => ({
   stage: getOrderStage(state),
 });
 
-export default connect(mapStateToProps, { commenceOrder, completeOrder })(props => {
+export default connect(mapStateToProps, { commenceOrder, completeOrder, fetchWalletRequest })(props => {
   const [isDetailsLoading, setIsDetailsLoading] = useState(false);
   const [isCommenceLoading, setIsCommenceLoading] = useState(false);
   const [isCompleteLoading, setIsCompleteLoading] = useState(false);
@@ -56,12 +57,15 @@ export default connect(mapStateToProps, { commenceOrder, completeOrder })(props 
   const _commenceOrder = async () => {
     setIsCommenceLoading(true);
     try {
-      const { data } = await api({
+      await api({
         url: `/${props.type.toLowerCase()}/commence/${props.id}`,
         method: 'PUT',
       });
-      console.log(data);
       props.commenceOrder();
+      Snackbar.show({
+        title: 'Trip has been commenced',
+        duration: Snackbar.LENGTH_LONG,
+      });
       fetchDetails();
     } catch (e) {
       console.log(e.response ? e.response : e);
@@ -76,13 +80,17 @@ export default connect(mapStateToProps, { commenceOrder, completeOrder })(props 
   const _completeOrder = async () => {
     setIsCompleteLoading(true);
     try {
-      const { data } = await api({
+      await api({
         url: `/${props.type.toLowerCase()}/end/${props.id}`,
         method: 'PUT',
       });
-      console.log(data);
       fetchDetails();
       props.completeOrder();
+      props.fetchWalletRequest();
+      Snackbar.show({
+        title: 'Order has been completed successfully',
+        duration: Snackbar.LENGTH_LONG,
+      });
     } catch (e) {
       console.log(e.response ? e.response : e);
       Snackbar.show({
@@ -97,13 +105,12 @@ export default connect(mapStateToProps, { commenceOrder, completeOrder })(props 
     fetchDetails();
   }, []);
 
-  console.log(details);
-
   return (
     <View style={BaseStyles.background}>
       <DashNav
         showBackButton={props.stage === 'COMPLETE'}
-        title="Ongoing Order"
+        navigation={props.navigation}
+        title={`${props.stage === 'COMPLETE' ? 'Completed' : 'Ongoing'} Order`}
         info="Details on current ride or delivery"
       />
 
