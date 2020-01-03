@@ -170,7 +170,7 @@ export default connect(mapStateToProps, { commenceOrder, completeOrder, fetchWal
                 {props.stage === 'ARRIVING' && (
                   <TouchableOpacity
                     onPress={_commenceOrder}
-                    style={{ ...BaseStyles.button, marginBottom: RFValue(35) }}
+                    style={{ ...BaseStyles.button, marginBottom: RFValue(20) }}
                     disabled={isCommenceLoading}
                   >
                     {isCommenceLoading ? (
@@ -184,7 +184,7 @@ export default connect(mapStateToProps, { commenceOrder, completeOrder, fetchWal
                 {props.stage === 'ONGOING' && (
                   <TouchableOpacity
                     onPress={_completeOrder}
-                    style={{ ...BaseStyles.button }}
+                    style={{ ...BaseStyles.button, marginBottom: RFValue(20) }}
                     disabled={isCompleteLoading}
                   >
                     {isCommenceLoading ? (
