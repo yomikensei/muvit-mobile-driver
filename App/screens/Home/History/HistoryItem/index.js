@@ -20,6 +20,7 @@ export default ({
         paddingVertical: RFValue(13),
         paddingHorizontal: RFValue(16),
         backgroundColor: Colors.black,
+        marginBottom: RFValue(10),
       }}
     >
       <MediumText customstyle={{ color: '#FFF', fontSize: RFValue(25) }}>{`₦ ${currencyFormatter(

@@ -1,13 +1,12 @@
-import React, { useState } from 'react';
-import { ScrollView, View } from 'react-native';
-import { RegularText } from 'components/Text';
+import React from 'react';
+import {ScrollView, View} from 'react-native';
 import DashNav from 'components/DashNav';
 import Snackbar from 'react-native-snackbar';
 import BaseStyles from 'theme/base';
-import { Formik } from 'formik';
+import {Formik} from 'formik';
 import ChangePasswordForm from './Form';
 import api from 'services/api';
-import { saveState } from 'app/localStorage';
+import {saveState} from 'app/localStorage';
 
 const initialValues = {
   current_password: '',
@@ -49,6 +48,7 @@ export default props => {
   return (
     <View style={BaseStyles.background}>
       <DashNav
+        showBackButton
         navigation={navigation}
         title="Change Password"
         info="Here you can update your password"

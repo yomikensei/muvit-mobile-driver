@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {ActivityIndicator, StyleSheet, View} from 'react-native';
 import FAB from 'react-native-fab';
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import { RegularText, MediumText } from 'components/Text';
+import {MediumText, RegularText} from 'components/Text';
 import DashNav from 'components/DashNav';
 import BaseStyles from 'theme/base';
 import Colors from 'theme/colors';
@@ -10,7 +10,7 @@ import api from 'services/api';
 
 import CreateVehicleDialog from './CreateVehicleDialog';
 import UpdateVehicleDialog from './UpdateVehicleDialog';
-import { RFValue } from 'react-native-responsive-fontsize';
+import {RFValue} from 'react-native-responsive-fontsize';
 
 const styles = StyleSheet.create({
   vehicle_item: {
@@ -55,6 +55,7 @@ export default props => {
   return (
     <View style={BaseStyles.background}>
       <DashNav
+        showBackButton
         navigation={navigation}
         title="Manage Vehicle"
         info="Here you can manage your vehicle"
