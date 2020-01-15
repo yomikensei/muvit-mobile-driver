@@ -118,7 +118,9 @@ export default props => {
           renderItem={({ item }) => <HistoryItem {...{ ...item }} />}
           keyExtractor={item => item.id}
           ListEmptyComponent={() => (
-            <RegularText>{`You haven't completed any ${tab.toLowerCase()} yet`}</RegularText>
+            <RegularText
+              customstyle={{ textAlign: 'center' }}
+            >{`You haven't completed any ${tab.toLowerCase()} yet`}</RegularText>
           )}
           onRefresh={tab === 'RIDES' ? fetchRides : fetchDeliveries}
         />

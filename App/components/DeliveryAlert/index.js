@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {connect} from 'react-redux';
 import {ActivityIndicator, StyleSheet, TouchableOpacity, View} from 'react-native';
+import Snackbar from 'react-native-snackbar';
 import Modal from 'react-native-modal';
 import {RFValue} from 'react-native-responsive-fontsize';
 import {BoldText, RegularText} from 'components/Text';
@@ -10,10 +11,7 @@ import {acceptOrder, rejectOrder} from 'services/orders/actions';
 import Colors from 'theme/colors';
 import {NavigationActions} from 'react-navigation';
 
-
-const mapStateToProps = state => ({
-
-});
+const mapStateToProps = () => ({});
 
 export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,16 +22,19 @@ export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
     details: { message },
     dispatch,
   } = props;
-  
+
   const _rejectOrder = async () => {
     setIsLoading(true);
     try {
-      const { data } = await api({
+      await api({
         url: `/${type.toLowerCase()}/reject/${id}`,
         method: 'PUT',
       });
+      Snackbar.show({ title: 'Order has been rejected', duration: Snackbar.LENGTH_LONG });
       props.rejectOrder();
     } catch (e) {
+      props.rejectOrder();
+      Snackbar.show({ title: 'Order has been rejected', duration: Snackbar.LENGTH_LONG });
       console.log(e.response ? e.response : e);
     }
     setIsLoading(false);
@@ -42,13 +43,18 @@ export default connect(mapStateToProps, { rejectOrder, acceptOrder })(props => {
   const _acceptOrder = async () => {
     setIsLoading(true);
     try {
-      const { data } = await api({
+      await api({
         url: `/${type.toLowerCase()}/accept/${id}`,
         method: 'PUT',
       });
       props.acceptOrder();
       dispatch(NavigationActions.navigate({ routeName: 'OngoingOrder' }));
     } catch (e) {
+      Snackbar.show({
+        title: 'Error accepting order, order might have already been accepted by another driver',
+        duration: Snackbar.LENGTH_LONG,
+      });
+      props.rejectOrder();
       console.log(e.response ? e.response : e);
     }
     setIsLoading(false);
@@ -143,4 +149,3 @@ const QCStyle = StyleSheet.create({
     paddingTop: RFValue(30),
   },
 });
-
