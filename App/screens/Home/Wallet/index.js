@@ -79,13 +79,18 @@ const Wallet = props => {
         </View>
 
         {props.next_withdrawal && !moment().isAfter(moment(next_withdrawal)) && (
-          <View
-            style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}
-          >
+          <View style={{ flexDirection: 'row', justifyContent: 'space-between' }}>
             <RegularText customstyle={{ color: 'rgba(255,255,255,0.6)', fontSize: RFValue(12) }}>
               next payment date
             </RegularText>
-            <BoldText customstyle={{ color: '#FFF', fontSize: RFValue(12) }}>
+            <BoldText
+              customstyle={{
+                color: '#FFF',
+                fontSize: RFValue(12),
+                maxWidth: '60%',
+                textAlign: 'right',
+              }}
+            >
               {moment(next_withdrawal).format('dddd, MMMM Do YYYY, h:mm a')}
             </BoldText>
           </View>
