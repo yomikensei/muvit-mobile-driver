@@ -1,4 +1,5 @@
 export const NEW_ORDER = 'NEW_ORDER';
+export const CANCEL_ORDER = 'CANCEL_ORDER';
 export const ACCEPT_ORDER =  'ACCEPT_ORDER';
 export const REJECT_ORDER = 'REJECT_ORDER';
 export const COMMENCE_ORDER = 'COMMENCE_ORDER';

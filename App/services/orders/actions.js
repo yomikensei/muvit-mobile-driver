@@ -15,6 +15,10 @@ export const rejectOrder = () => ({
   type: types.REJECT_ORDER,
 });
 
+export const cancelOrder = () => ({
+  type: types.CANCEL_ORDER,
+});
+
 export const commenceOrder = () => ({
   type: types.COMMENCE_ORDER,
 });

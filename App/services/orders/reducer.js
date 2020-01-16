@@ -31,6 +31,9 @@ export default (state = initialState, action) => {
     case types.REJECT_ORDER:
       return initialState;
 
+    case types.CANCEL_ORDER:
+      return { ...initialState, order_type: state.order_type, stage: 'CANCELLED' };
+
     case types.COMMENCE_ORDER:
       return {
         ...state,

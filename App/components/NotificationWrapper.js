@@ -2,10 +2,14 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PushNotification from 'react-native-push-notification';
 import {firebase} from '@react-native-firebase/messaging';
-import {newOrder} from 'services/orders/actions';
+import {cancelOrder, newOrder} from 'services/orders/actions';
+import {NavigationActions} from 'react-navigation';
 
 export default WrappedComponent =>
-  connect(mapStateToProps, { newOrder })(
+  connect(
+    mapStateToProps,
+    mapDispatchToProps
+  )(
     class NotificationWrapper extends React.PureComponent {
       componentDidMount() {
         this.messageListener = firebase.messaging().onMessage(message => {});
@@ -13,11 +17,11 @@ export default WrappedComponent =>
 
       render() {
         const self = this;
+        console.log(self.props);
         PushNotification.configure({
           onNotification(notification) {
             switch (notification.action) {
               case 'NEW_RIDE_REQUEST':
-                console.log('notification');
                 PushNotification.localNotification({
                   largeIcon: 'ic_launcher',
                   smallIcon: 'ic_launcher_round',
@@ -47,29 +51,53 @@ export default WrappedComponent =>
                 });
                 break;
 
+              case 'DELIVERY_CANCELLED':
+              case 'RIDE_CANCELLED':
+                PushNotification.localNotification({
+                  largeIcon: 'ic_launcher',
+                  smallIcon: 'ic_launcher_round',
+                  vibration: 300,
+                  title: 'Delivery cancelled',
+                  message: notification.title,
+                  tag: JSON.stringify({
+                    action: 'ORDER_CANCELLED',
+                  }),
+                });
+                self.props.dispatch(cancelOrder());
+                self.props.navigate('Home');
+                break;
+
               default:
                 if (!notification.tag) break;
                 const tag = JSON.parse(notification.tag);
-                console.log(tag)
                 switch (tag.action) {
                   case 'NEW_RIDE_REQUEST':
-                    self.props.newOrder({
-                      order_details: {
-                        message: notification.message,
-                      },
-                      order_id: tag.model_id,
-                      order_type: 'RIDE',
-                    });
+                    self.props.dispatch(
+                      newOrder({
+                        order_details: {
+                          message: notification.message,
+                        },
+                        order_id: tag.model_id,
+                        order_type: 'RIDE',
+                      })
+                    );
                     break;
 
                   case 'NEW_DELIVERY_REQUEST':
-                    self.props.newOrder({
-                      order_details: {
-                        message: notification.message,
-                      },
-                      order_id: tag.model_id,
-                      order_type: 'DELIVERY',
-                    });
+                    self.props.dispatch(
+                      newOrder({
+                        order_details: {
+                          message: notification.message,
+                        },
+                        order_id: tag.model_id,
+                        order_type: 'DELIVERY',
+                      })
+                    );
+                    break;
+
+                  case 'ORDER_CANCELLED':
+                    self.props.dispatch(cancelOrder());
+                    self.props.navigate('Home');
                     break;
 
                   default:
@@ -85,3 +113,7 @@ export default WrappedComponent =>
   );
 
 const mapStateToProps = state => ({});
+const mapDispatchToProps = dispatch => ({
+  navigate: (routeName, params) => dispatch(NavigationActions.navigate({ routeName, params })),
+  dispatch,
+});
